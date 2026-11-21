@@ -1,4 +1,4 @@
-interface IUser {
+export interface IUser {
     _id: string,
     name: string,
     email: string,
@@ -8,19 +8,19 @@ interface IUser {
     updatedAt?: Date
 }
 
-interface RegisterBody {
+export interface RegisterBody {
     name: string,
     email: string,
     mobile: string,
     password: string
 }
 
-interface LoginBody {
+export interface LoginBody {
     email: string,
     password: string
 }
 
-interface JWTPayload {
+export interface JWTPayload {
     userId: string,
     email?: string
 }
