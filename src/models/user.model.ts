@@ -1,6 +1,8 @@
+import { IUser } from "@/types/user.types";
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema<IUser>({
     name: {
         type: String,
         trim: true,
@@ -16,5 +18,25 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Password is required"],
         minLength: [8, "Minimum 8 characters required"]
+    },
+    mobile: {
+        type: String,
+        minLength: [10, "Minimum 10 digit required"],
+        maxLength: [10, "Maximum 10 digit required"]
     }
+}, {
+    timestamps: true
 });
+
+userSchema.pre("save", function (): void {
+    if (!this.isModified("password")) return
+    this.password = bcrypt.hashSync(this.password, 10);
+});
+
+userSchema.methods.comparePass = function (candidatePassword: string): boolean {
+    return bcrypt.compareSync(candidatePassword, this.password)
+};
+
+const userModel = mongoose.model("User", userSchema);
+
+export default userModel;
