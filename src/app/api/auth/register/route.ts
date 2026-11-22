@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
         const isExisted = await userModel.findOne({ email });
 
-        if (!isExisted) return NextResponse.json<ApiResponse>({
+        if (isExisted) return NextResponse.json<ApiResponse>({
             message: "User already exists",
             success: false
         }, { status: 409 });
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
             name, email, mobile, password
         });
 
-        const token = generateToken({ userId: newUser._id });
+        const token = generateToken({ userId: newUser._id.toString() });
 
         const response = NextResponse.json<ApiResponse>({
             message: "User registered successfully",
