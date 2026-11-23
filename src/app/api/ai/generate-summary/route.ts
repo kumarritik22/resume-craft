@@ -6,7 +6,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        await connectToDB();
 
         const body: GenerateSummaryBody = await req.json();
 
