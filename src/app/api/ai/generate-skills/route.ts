@@ -8,9 +8,9 @@ export async function POST(req: NextRequest) {
 
         const body: GenerateSkillsBody = await req.json();
 
-        const { exprienceLevel, jobTitle } = body;
+        const { experienceLevel, jobTitle } = body;
 
-        if (!exprienceLevel || !jobTitle) {
+        if (!experienceLevel || !jobTitle) {
             return NextResponse.json<ApiResponse>({
                 message: "Missing fields",
                 success: false
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
             Candidate Details:
             Job Title: ${jobTitle}
-            Experience Level: ${exprienceLevel}
+            Experience Level: ${experienceLevel}
 
             Instructions and Rules:
 

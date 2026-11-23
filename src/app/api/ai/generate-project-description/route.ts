@@ -8,22 +8,21 @@ export async function POST(req: NextRequest) {
 
         const body: GenerateProjectDescriptionBody = await req.json();
 
-        const { exprienceLevel, jobTitle, techStack, projectTitle, projectFeatures } = body;
+        const { experienceLevel, jobTitle, techStack, projectTitle, projectFeatures } = body;
 
-        if (!exprienceLevel || !jobTitle || !techStack || !projectTitle || !projectFeatures) {
+        if (!experienceLevel || !jobTitle || !techStack || !projectTitle || !projectFeatures) {
             return NextResponse.json<ApiResponse>({
                 message: "Missing fields",
                 success: false
             }, { status: 400 });
         } 
         
-        
         const prompt = `
             You are an expert resume writer and ATS optimization specialist specializing in technical resumes.
 
             Generate a professional, impactful, and ATS-friendly project description using the following details:
 
-            Experience Level: ${exprienceLevel}
+            Experience Level: ${experienceLevel}
             Target Job Title: ${jobTitle}
             Project Title: ${projectTitle}
             Project Features: ${projectFeatures}
