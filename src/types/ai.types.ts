@@ -16,3 +16,10 @@ export interface GenerateProjectDescriptionBody {
     projectFeatures: string[];
     techStack: string[];
 };
+
+export interface GenerateExperienceDescriptionBody {
+    exprienceLevel: string;
+    jobRole: string;
+    yearsOfExperience: number;
+    techStack: string[];
+};
