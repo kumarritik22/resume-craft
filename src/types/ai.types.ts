@@ -1,10 +1,10 @@
-interface GenerateSummary {
+export interface GenerateSummaryBody {
     exprienceLevel: string;
     skills: string[];
     jobTitle: string;
 };
 
-interface GenerateSkills {
+export interface GenerateSkillsBody {
     exprienceLevel: string;
     jobTitle: string;
 };
