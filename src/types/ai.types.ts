@@ -23,3 +23,10 @@ export interface GenerateExperienceDescriptionBody {
     yearsOfExperience: number;
     techStack: string[];
 };
+
+export interface GenerateWorkExperienceDescriptionBody {
+    experienceLevel: string;
+    jobRole: string;
+    yearsOfExperience: number;
+    techStack: string[];
+};
