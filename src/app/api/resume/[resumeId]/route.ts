@@ -37,3 +37,46 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ resu
     }
 };
 
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ resumeId: string }> }) {
+    try {
+        await connectToDB();
+
+        const user = await getCurrentUser();
+
+        const body = await req.json();
+
+        const { resumeId } = await params;
+
+        const updatedResume = await resumeModel.findByIdAndUpdate(
+            {
+                _id: resumeId,
+                user_id: user.userId
+            },
+            {
+                $set: body
+            },
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+        
+        if (!updatedResume) return NextResponse.json<ApiResponse>({
+            success: false,
+            message: "Failed to update resume"
+        }, { status: 400 });
+
+        return NextResponse.json<ApiResponse>({
+            success: true,
+            message: "Resume updated successfully",
+            data: { updatedResume }
+        }, { status: 200 });
+
+    } catch (error) {
+        console.error("Error in update resume api:", error);
+        return NextResponse.json<ApiResponse>({
+            success: false,
+            message: "Something went wrong"
+        }, { status: 500 });
+    }
+};
