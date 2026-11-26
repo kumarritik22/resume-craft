@@ -1,12 +1,12 @@
 import { generateAiContent } from "@/lib/gemini";
-import { improveContentBody } from "@/types/ai.types";
+import { ImproveContentBody } from "@/types/ai.types";
 import { ApiResponse } from "@/types/api.types";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
 
-        const body: improveContentBody = await req.json();
+        const body: ImproveContentBody = await req.json();
 
         const { content } = body;
 

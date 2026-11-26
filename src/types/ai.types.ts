@@ -24,10 +24,10 @@ export interface GenerateExperienceDescriptionBody {
     techStack: string[];
 };
 
-export interface improveContentBody {
+export interface ImproveContentBody {
     content: string;
 };
 
-export interface atsScoreBody {
+export interface ATSScoreBody {
     resumeText: string;
 };
