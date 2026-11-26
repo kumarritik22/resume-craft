@@ -23,3 +23,7 @@ export interface GenerateExperienceDescriptionBody {
     yearsOfExperience: number;
     techStack: string[];
 };
+
+export interface improveContentBody {
+    content: string;
+}
