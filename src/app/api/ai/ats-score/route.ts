@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
 
         if (!resumeText) {
             return NextResponse.json<ApiResponse>({
-                message: "Missing fields",
-                success: false
+                success: false,
+                message: "Missing fields"
             }, { status: 400 });
         } 
         
@@ -103,19 +103,28 @@ export async function POST(req: NextRequest) {
 
         const result = await generateAiContent(prompt);
 
-        const atsScore = result;
+        let atsScore = result;
+
+        if (typeof atsScore === "string") {
+            try {
+                const cleaned = atsScore.replace(/```json|```/g, "").trim();
+                atsScore = JSON.parse(cleaned);
+            } catch (error) {
+                console.error("Failed to parse ATS score:", error);
+            }
+        }
 
         return NextResponse.json<ApiResponse>({
-            message: "ATS score generated successfully",
             success: true,
+            message: "ATS score generated successfully",
             data: { atsScore }
         }, { status: 201 });
 
     } catch (error) {
         console.error("Error in ATS Score api", error);
         return NextResponse.json<ApiResponse>({
-            message: "Something went wrong",
-            success: false
+            success: false,
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };
