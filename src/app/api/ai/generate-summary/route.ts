@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
 
         if (!experienceLevel || !jobTitle || !skills) {
             return NextResponse.json<ApiResponse>({
-                message: "Missing fields",
-                success: false
+                success: false,
+                message: "Missing fields"
             }, { status: 400 });
         } 
         
@@ -75,16 +75,16 @@ export async function POST(req: NextRequest) {
         const summary = result;
 
         return NextResponse.json<ApiResponse>({
-            message: "Resume summary created successfully",
             success: true,
+            message: "Resume summary created successfully",
             data: { summary }
         }, { status: 201 });
 
     } catch (error) {
         console.error("Error in generate summary api", error);
         return NextResponse.json<ApiResponse>({
-            message: "Something went wrong",
-            success: false
+            success: false,
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };

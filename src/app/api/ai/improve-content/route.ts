@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
 
         if (!content) {
             return NextResponse.json<ApiResponse>({
-                message: "Missing fields",
-                success: false
+                success: false,
+                message: "Missing fields"
             }, { status: 400 });
         }
             
@@ -58,16 +58,16 @@ export async function POST(req: NextRequest) {
         const improvedContent = result;
 
         return NextResponse.json<ApiResponse>({
-            message: "Improved content generated successfully",
             success: true,
+            message: "Improved content generated successfully",
             data: { improvedContent }
         }, { status: 201 });
 
     } catch (error) {
         console.error("Error in improve content api", error);
         return NextResponse.json<ApiResponse>({
-            message: "Something went wrong",
-            success: false
+            success: false,
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };

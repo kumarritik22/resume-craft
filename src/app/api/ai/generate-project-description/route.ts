@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
 
         if (!experienceLevel || !jobTitle || !techStack || !projectTitle || !projectFeatures) {
             return NextResponse.json<ApiResponse>({
-                message: "Missing fields",
-                success: false
+                success: false,
+                message: "Missing fields"
             }, { status: 400 });
         } 
         
@@ -52,16 +52,16 @@ export async function POST(req: NextRequest) {
         const projectDescription = result;
 
         return NextResponse.json<ApiResponse>({
-            message: "Project description created successfully",
             success: true,
+            message: "Project description created successfully",
             data: { projectDescription }
         }, { status: 201 });
 
     } catch (error) {
         console.error("Error in generate project description api", error);
         return NextResponse.json<ApiResponse>({
-            message: "Something went wrong",
-            success: false
+            success: false,
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };

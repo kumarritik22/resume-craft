@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
 
         if (!experienceLevel || !jobRole || !techStack || !yearsOfExperience) {
             return NextResponse.json<ApiResponse>({
-                message: "Missing fields",
-                success: false
+                success: false,
+                message: "Missing fields"
             }, { status: 400 });
         }
         
@@ -59,16 +59,16 @@ export async function POST(req: NextRequest) {
         const workExperienceDescription = result;
 
         return NextResponse.json<ApiResponse>({
-            message: "Work experience description created successfully",
             success: true,
+            message: "Work experience description created successfully",
             data: { workExperienceDescription }
         }, { status: 201 });
 
     } catch (error) {
         console.error("Error in generate work experience description api", error);
         return NextResponse.json<ApiResponse>({
-            message: "Something went wrong",
-            success: false
+            success: false,
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };
