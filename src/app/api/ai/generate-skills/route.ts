@@ -98,7 +98,8 @@ export async function POST(req: NextRequest) {
 
         if (typeof skills === "string") {
             try {
-                skills = JSON.parse(skills);
+                const cleaned = skills.replace(/```json|```/g, "").trim();
+                skills = JSON.parse(cleaned);
             } catch (error) {
                 console.error("Failed to parse skills:", error)
             }
