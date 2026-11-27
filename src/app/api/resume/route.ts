@@ -24,8 +24,7 @@ export async function GET() {
         console.error("Error in get all resumes api:", error);
         return NextResponse.json<ApiResponse>({
             success: false,
-            message: "Unauthorized or invalid access",
-            error: { error }
+            message: "Unauthorized or invalid access"
         }, { status: 401 });
     }
 };

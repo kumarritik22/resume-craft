@@ -16,8 +16,7 @@ export async function POST() {
         console.error("Error in logout api:", error);
         return NextResponse.json<ApiResponse>({
             success: false,
-            message: "Something went wrong",
-            error: { error }
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };

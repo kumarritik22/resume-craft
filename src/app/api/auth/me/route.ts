@@ -29,8 +29,7 @@ export async function GET() {
         console.error("Error in get me api:", error);
         return NextResponse.json<ApiResponse>({
             success: false,
-            message: "Unauthorized or invalid session",
-            error: { error }
+            message: "Unauthorized or invalid session"
         }, { status: 401 });
     }
 };

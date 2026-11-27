@@ -15,30 +15,30 @@ export async function POST(req: NextRequest) {
 
         if (!email || !password) {
             return NextResponse.json<ApiResponse>({
-                message: "All fields are required",
-                success: false
+                success: false,
+                message: "All fields are required"
             }, { status: 400 });
         };
 
         const isExisted = await userModel.findOne({ email });
 
         if (!isExisted) return NextResponse.json<ApiResponse>({
-            message: "User not found",
-            success: false
+            success: false,
+            message: "User not found"
         }, { status: 404 });
 
         const matchPass = isExisted.comparePass(password);
 
         if (!matchPass) return NextResponse.json<ApiResponse>({
-            message: "Invalid credentials",
-            success: false
+            success: false,
+            message: "Invalid credentials"
         }, { status: 401 });
 
         const token = generateToken({ userId: isExisted._id.toString() });
 
         const response = NextResponse.json<ApiResponse>({
-            message: "User logged in successfully",
             success: true,
+            message: "User logged in successfully",
             data: {
                 user: {
                     _id: isExisted._id,
@@ -59,9 +59,8 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.error("Error in login api", error);
         return NextResponse.json<ApiResponse>({
-            message: "Something went wrong",
             success: false,
-            error: { error }
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };
