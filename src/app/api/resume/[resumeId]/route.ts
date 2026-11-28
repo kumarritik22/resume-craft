@@ -4,7 +4,7 @@ import resumeModel from "@/models/resume.model";
 import { ApiResponse } from "@/types/api.types";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ resumeId: string }> }) {
+export async function GET({ params }: { params: Promise<{ resumeId: string }> }) {
     try {
         await connectToDB();
 
@@ -81,7 +81,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ re
     }
 };
 
-export async function DELETE(req: NextRequest, {params}: { params: Promise<{ resumeId: string }> }) {
+export async function DELETE({params}: { params: Promise<{ resumeId: string }> }) {
     try {
         await connectToDB();
 
