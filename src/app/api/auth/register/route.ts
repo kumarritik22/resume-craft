@@ -22,8 +22,8 @@ export async function POST(req: NextRequest) {
         const isExisted = await userModel.findOne({ email });
 
         if (isExisted) return NextResponse.json<ApiResponse>({
-            message: "User already exists",
-            success: false
+            success: false,
+            message: "User already exists"
         }, { status: 409 });
 
         const newUser = await userModel.create({ 
@@ -33,8 +33,8 @@ export async function POST(req: NextRequest) {
         const token = generateToken({ userId: newUser._id.toString() });
 
         const response = NextResponse.json<ApiResponse>({
-            message: "User registered successfully",
             success: true,
+            message: "User registered successfully",
             data: {
                 user: {
                     _id: newUser._id,
@@ -55,9 +55,8 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.error("Error in register api", error);
         return NextResponse.json<ApiResponse>({
-            message: "Something went wrong",
             success: false,
-            error: { error }
+            message: "Something went wrong"
         }, { status: 500 });
     }
 };
