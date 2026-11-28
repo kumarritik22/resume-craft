@@ -1,3 +1,4 @@
+import { ATSScoreBody, GenerateExperienceDescriptionBody, GenerateProjectDescriptionBody, GenerateSkillsBody, GenerateSummaryBody, ImproveContentBody } from "@/types/ai.types";
 import { ApiResponse } from "@/types/api.types";
 import { IResume } from "@/types/resume.types";
 import { LoginBody, RegisterBody } from "@/types/user.types";
@@ -58,6 +59,39 @@ export const resumeService = {
         const response = await api.delete<ApiResponse>(`/resume/${resumeId}`);
         return response.data;
     }
+};
+
+
+export const aiService = {
+    generateSummary: async (data: GenerateSummaryBody) => {
+        const response = await api.post<ApiResponse>("/ai/generate-summary", data);
+        return response.data;
+    },
+
+    generateSkills: async (data: GenerateSkillsBody) => {
+        const response = await api.post<ApiResponse>("/ai/generate-skills", data);
+        return response.data;
+    },
+
+    generateExperienceDescription: async (data: GenerateExperienceDescriptionBody) => {
+        const response = await api.post<ApiResponse>("/ai/generate-experience-description", data);
+        return response.data;
+    },
+
+    generateProjectDescription: async (data: GenerateProjectDescriptionBody) => {
+        const response = await api.post<ApiResponse>("/ai/generate-project-description", data);
+        return response.data;
+    },
+
+    improveContent: async (data: ImproveContentBody) => {
+        const response = await api.post<ApiResponse>("/ai/improve-content", data);
+        return response.data;
+    },
+
+    atsScore: async (data: ATSScoreBody) => {
+        const response = await api.post<ApiResponse>("/ai/ats-score", data);
+        return response.data;
+    },
 };
 
 export default api;
